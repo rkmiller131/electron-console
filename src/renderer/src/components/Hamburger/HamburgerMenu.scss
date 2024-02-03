@@ -1,0 +1,44 @@
+.burger-menu {
+  cursor: pointer;
+  display: flex;
+  align-items: end;
+  flex-direction: column;
+  gap: 5px;
+  width: 30px; // Adjust size as needed
+  scale: 1.4;
+
+  .bun {
+    background-color: #00a3ff; // Adjust color as needed
+    height: 3px; // Adjust thickness as needed
+    transition: transform 0.3s ease;
+
+    &.top {
+      width: 100%;
+      border-radius: 40px;
+    }
+
+    &.middle {
+      width: 70%;
+      border-radius: 40px;
+    }
+
+    &.bottom {
+      width: 100%;
+      border-radius: 40px;
+    }
+  }
+
+  &.open {
+    .top {
+      transform: translateY(8px) rotate(45deg);
+    }
+
+    .middle {
+      opacity: 0;
+    }
+
+    .bottom {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+  }
+}

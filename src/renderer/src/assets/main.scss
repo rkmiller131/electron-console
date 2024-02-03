@@ -1,0 +1,18 @@
+@import './base.css';
+@import '../components/IntroVideo/VideoLoader.scss';
+@import '../components/Header/Header.scss';
+@import '../components/Hamburger/HamburgerMenu.scss';
+
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.main-container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100vh;
+}
