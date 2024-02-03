@@ -1,0 +1,369 @@
+:root {
+  --default-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu,
+    'Helvetica Neue', Helvetica, Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei UI',
+    'Microsoft Yahei', 'Source Han Sans CN', sans-serif;
+}
+
+.main-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.main-container,
+.main-container * {
+  box-sizing: border-box;
+}
+
+input,
+select,
+textarea,
+button {
+  outline: 0;
+}
+
+.main-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  margin: 0 auto;
+}
+.frame {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  gap: 14px;
+  position: relative;
+  width: 1547px;
+  margin: 475px 0 0 100px;
+  z-index: 2;
+}
+.refactor-games {
+  flex-shrink: 0;
+  flex-basis: auto;
+  position: relative;
+  height: 41px;
+  color: #c5c5c5;
+  font-family:
+    Noto Sans,
+    var(--default-font-family);
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 40.86px;
+  text-align: left;
+  white-space: nowrap;
+  z-index: 3;
+}
+.main-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  gap: 80px;
+  position: relative;
+  width: 1547px;
+  z-index: 4;
+}
+.group {
+  flex-shrink: 0;
+  position: relative;
+  width: 1547px;
+  height: 297px;
+  font-size: 0px;
+  z-index: 5;
+}
+.football-simulator {
+  display: block;
+  position: relative;
+  height: 80px;
+  margin: 0 0 0 0;
+  color: #fefcfe;
+  font-family: Signika, var(--default-font-family);
+  font-size: 64px;
+  font-weight: 400;
+  line-height: 78.848px;
+  text-align: left;
+  white-space: nowrap;
+  z-index: 6;
+}
+.subheader {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  gap: 18.645px;
+  position: relative;
+  width: 578.677px;
+  margin: 31.389px 0 0 0;
+  z-index: 7;
+}
+.button-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  gap: 9.323px;
+  position: relative;
+  width: 249.968px;
+  height: 38.223px;
+  padding: 0 13.984px 0 13.984px;
+  cursor: pointer;
+  background: #ff9056;
+  border: none;
+  z-index: 8;
+  border-radius: 27.968px;
+}
+.action-adventure {
+  flex-shrink: 0;
+  flex-basis: auto;
+  position: relative;
+  height: 13px;
+  color: #ffffff;
+  font-family:
+    Noto Sans,
+    var(--default-font-family);
+  font-size: 18.645160675048828px;
+  font-weight: 600;
+  line-height: 13px;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+  z-index: 9;
+}
+.button-frame-1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  gap: 9.323px;
+  position: relative;
+  width: 104.968px;
+  height: 38.223px;
+  padding: 0 13.984px 0 13.984px;
+  cursor: pointer;
+  background: #ff9056;
+  border: none;
+  z-index: 10;
+  border-radius: 27.968px;
+}
+.sport {
+  flex-shrink: 0;
+  flex-basis: auto;
+  position: relative;
+  height: 13px;
+  color: #ffffff;
+  font-family:
+    Noto Sans,
+    var(--default-font-family);
+  font-size: 18.645160675048828px;
+  font-weight: 600;
+  line-height: 13px;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+  z-index: 11;
+}
+.divider {
+  flex-shrink: 0;
+  position: relative;
+  width: 7.458px;
+  height: 37.29px;
+  background: url(../../assets/images/fae80c4d-8c1d-46ad-97ad-068a4ed7aef0.png) no-repeat center;
+  background-size: cover;
+  z-index: 12;
+  overflow: hidden;
+}
+.rating {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  gap: 9.323px;
+  position: relative;
+  width: 160.348px;
+  z-index: 13;
+}
+.rating-2 {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  position: relative;
+  width: 111.871px;
+  z-index: 14;
+}
+.star {
+  flex-shrink: 0;
+  position: relative;
+  width: 22.374px;
+  height: 22.374px;
+  background: url(../../assets/images/0e5525f7-4cc7-415e-bb56-368bf698341c.png) no-repeat center;
+  background-size: cover;
+  z-index: 15;
+}
+.star-3 {
+  flex-shrink: 0;
+  position: relative;
+  width: 22.374px;
+  height: 22.374px;
+  background: url(../../assets/images/bbb6769b-f552-4d2d-b9ab-ef0f165dd70b.png) no-repeat center;
+  background-size: cover;
+  z-index: 16;
+}
+.star-4 {
+  flex-shrink: 0;
+  position: relative;
+  width: 22.374px;
+  height: 22.374px;
+  background: url(../../assets/images/83f182c7-02f0-4990-b52e-f20f43e43721.png) no-repeat center;
+  background-size: cover;
+  z-index: 17;
+}
+.star-5 {
+  flex-shrink: 0;
+  position: relative;
+  width: 22.374px;
+  height: 22.374px;
+  background: url(../../assets/images/658c5db1-d0e9-40bd-aff1-6cae17b51079.png) no-repeat center;
+  background-size: cover;
+  z-index: 18;
+}
+.star-6 {
+  flex-shrink: 0;
+  position: relative;
+  width: 22.374px;
+  height: 22.374px;
+  background: url(../../assets/images/af07472a-09c4-430e-9152-3792d0cbcb3f.png) no-repeat center;
+  background-size: cover;
+  z-index: 19;
+}
+.span-78 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  flex-basis: auto;
+  position: relative;
+  width: 39.155px;
+  height: 37.29px;
+  color: #c5c5c5;
+  font-family:
+    Noto Sans,
+    var(--default-font-family);
+  font-size: 27.967742919921875px;
+  font-weight: 600;
+  line-height: 37.29px;
+  text-align: left;
+  white-space: nowrap;
+  z-index: 20;
+}
+.span-moddable-physics-football-game {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: relative;
+  width: 924px;
+  height: 116px;
+  margin: 31.389px 0 0 0;
+  color: #fefcfe;
+  font-family:
+    Noto Sans,
+    var(--default-font-family);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32.688px;
+  text-align: left;
+  z-index: 21;
+}
+.buttons {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  gap: 23.125px;
+  position: relative;
+  width: 397.75px;
+  z-index: 22;
+}
+.button-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  position: relative;
+  width: 300.625px;
+  height: 74px;
+  padding: 13.875px 27.75px 13.875px 27.75px;
+  cursor: pointer;
+  background: rgba(44, 46, 48, 0.8);
+  border: none;
+  z-index: 23;
+  border-radius: 90.188px;
+  backdrop-filter: blur(2.313px);
+}
+.span-play {
+  align-self: stretch;
+  flex-shrink: 0;
+  flex-basis: auto;
+  position: relative;
+  min-width: 0;
+  height: 38px;
+  color: #c5c5c5;
+  font-family:
+    Noto Sans,
+    var(--default-font-family);
+  font-size: 27.75px;
+  font-weight: 600;
+  line-height: 37.795px;
+  text-align: center;
+  white-space: nowrap;
+  z-index: 24;
+}
+.button-icon {
+  flex-shrink: 0;
+  position: relative;
+  width: 74px;
+  height: 74px;
+  background: rgba(44, 46, 48, 0.8);
+  z-index: 25;
+  border-radius: 148px;
+  backdrop-filter: blur(2.891px);
+}
+.button-icon-7 {
+  position: relative;
+  width: 34.688px;
+  height: 31.219px;
+  margin: 21.969px 0 0 19.656px;
+  background: url(../../assets/images/e1eca7db-ee46-4bc7-922d-86797346976b.png) no-repeat center;
+  background-size: cover;
+  z-index: 26;
+  overflow: hidden;
+}
+.base-game-background {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: url(../../assets/images/364889f1-8bc9-499e-8909-d37a99f3ed57.png) no-repeat center;
+  background-size: cover;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    -120deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.26) 31.03%,
+    rgba(0, 0, 0, 0.56) 41.58%,
+    rgb(0, 0, 0) 71.1%
+  );
+}
