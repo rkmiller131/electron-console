@@ -2,9 +2,9 @@ import { app, shell, BrowserWindow, ipcMain, net } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
-import fs from 'fs'
+// import fs from 'fs'
 import path from 'path'
-import https from 'https'
+// import https from 'https'
 
 // Nazarii's paths
 // const steamAppsPath = 'C:\\Program Files (x86)\\Steam\\steamapps'
