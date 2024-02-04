@@ -2,7 +2,7 @@ import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI, ElectronAPI } from '@electron-toolkit/preload'
 
 const api = {
-  openGameDetails: (gameId: string): Promise<unknown> => ipcRenderer.invoke('open-game-details', gameId),
+  openGameDetails: (gameId: string): Promise<unknown> => ipcRenderer.invoke('open-game-detail', gameId),
 }
 
 if (process.contextIsolated) {

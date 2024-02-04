@@ -75,8 +75,7 @@ export default function Carousel<T extends CarouselItem>({
         // open steam details page (new browser window process).
         const gameId = list[selectedIndex].id;
         // navigate('/game/' + gameId)
-        // window.api.openGameDetails(gameId);
-        window.electron.ipcRenderer.send('open-game-detail', gameId)
+        window.api.openGameDetails(gameId);
       }
     }
   }, [list.length, playNavigationSound])
