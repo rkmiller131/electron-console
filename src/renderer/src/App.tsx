@@ -6,15 +6,13 @@ import Carousel from './components/Carousel'
 import VideoLoader from './components/LoadingScreens/VideoLoader'
 import GameDetails from './components/GameDetails'
 import { store } from './redux/store'
-import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { selectGameList, selectGameStatus, fetchGames } from './redux/gameSlice'
 import { fetchApps, selectAppList, selectAppStatus } from './redux/dashboardSlice'
 
 
 function App(): JSX.Element {
   const [videoEnded, setVideoEnded] = useState(false);
-
-  const { id } = useParams();
 
   const handleVideoEnd = ():void => {
     setVideoEnded(true)
@@ -50,7 +48,7 @@ function App(): JSX.Element {
               />
               <Route
                 path="/game/:id"
-                element={<GameDetails id={id}/>}
+                element={<GameDetails />}
               />
               <Route
                 path="/games"

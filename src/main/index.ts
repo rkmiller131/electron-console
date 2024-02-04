@@ -144,18 +144,18 @@ function createWindow(): void {
     }
   })
 
-  mainWindow.webContents.session.clearCache().then(() => {
-    console.log('Cache cleared.')
-  })
+  // mainWindow.webContents.session.clearCache().then(() => {
+  //   console.log('Cache cleared.')
+  // })
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
   })
 
-  mainWindow.webContents.setWindowOpenHandler((details) => {
-    shell.openExternal(details.url)
-    return { action: 'deny' }
-  })
+  // mainWindow.webContents.setWindowOpenHandler((details) => {
+  //   shell.openExternal(details.url)
+  //   return { action: 'deny' }
+  // })
 
   // Load the index.html of the app.
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
@@ -172,19 +172,37 @@ app.whenReady().then(() => {
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
   })
+
   ipcMain.on('ping', () => console.log('pong'))
+
   ipcMain.handle('open-game-detail', async (event, gameId) => {
     const gameDetailWindow = new BrowserWindow({
-      width: 800,
-      height: 600,
+      fullscreen: true,
+      frame: false,
       webPreferences: {
         preload: path.join(__dirname, '../preload/index.js'),
         sandbox: false,
         contextIsolation: true,
+        webSecurity: false,
       }
     })
 
-    gameDetailWindow.loadURL(`file://${__dirname}/../renderer/index.html#/game/${gameId}`)
+    gameDetailWindow.loadURL(`file://${path.join(__dirname, '../renderer/windows/GameDetailPage/index.html')}`);
+    // gameDetailWindow.loadFile(join(__dirname, '../renderer/windows/GameDetailPage/index.html'));
+    gameDetailWindow.webContents.on('did-finish-load', () => {
+      // Send the game ID to the new BrowserWindow
+      gameDetailWindow.webContents.send('game-id', gameId);
+    });
+
+    // gameDetailWindow.loadURL(`file://${__dirname}/../renderer/index.html#/game/${gameId}`)
+    // gameDetailWindow.loadFile(path.join(__dirname, '../renderer/index.html#game/1604890'));
+    // Load the HTML file and pass the gameId to the renderer process
+    // gameDetailWindow.loadFile(path.join(__dirname, '../renderer/index.html'));
+    // if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
+    //   gameDetailWindow.loadURL(`http://localhost:5173/game/${gameId}`);
+    // } else {
+    //   gameDetailWindow.loadURL(`file://${__dirname}/../renderer/index.html#/game/${gameId}`)
+    // }
   })
   createWindow()
   app.on('activate', function () {
