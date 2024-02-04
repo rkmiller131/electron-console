@@ -36,43 +36,43 @@ import https from 'https'
 
 // Copy matching files to public folder and prepare data for games.json
 
-function fetchGameDetails(appId) {
-  return new Promise((resolve, reject) => {
-    const url = `https://store.steampowered.com/api/appdetails?appids=${appId}`
-    const request = net.request(url)
+// function fetchGameDetails(appId) {
+//   return new Promise((resolve, reject) => {
+//     const url = `https://store.steampowered.com/api/appdetails?appids=${appId}`
+//     const request = net.request(url)
 
-    request.on('response', (response) => {
-      let rawData = ''
-      response.on('data', (chunk) => {
-        rawData += chunk
-      })
+//     request.on('response', (response) => {
+//       let rawData = ''
+//       response.on('data', (chunk) => {
+//         rawData += chunk
+//       })
 
-      response.on('end', () => {
-        try {
-          const result = JSON.parse(rawData)
-          if (result[appId].success) {
-            resolve(result[appId].data)
-          } else {
-            reject(new Error(`Request to Steam API for appid ${appId} was not successful`))
-          }
-        } catch (e) {
-          reject(e)
-        }
-      })
-    })
+//       response.on('end', () => {
+//         try {
+//           const result = JSON.parse(rawData)
+//           if (result[appId].success) {
+//             resolve(result[appId].data)
+//           } else {
+//             reject(new Error(`Request to Steam API for appid ${appId} was not successful`))
+//           }
+//         } catch (e) {
+//           reject(e)
+//         }
+//       })
+//     })
 
-    request.on('error', (error) => {
-      reject(error)
-    })
+//     request.on('error', (error) => {
+//       reject(error)
+//     })
 
-    request.end()
-  })
-}
+//     request.end()
+//   })
+// }
 
-function extractDescription(html) {
-  const match = html.match(/<p class="header-description".*?>([\s\S]*?)<\/div>/)
-  return match ? match[1].replace(/<[^>]+>/g, '').trim() : '' // Remove HTML tags and trim
-}
+// function extractDescription(html) {
+//   const match = html.match(/<p class="header-description".*?>([\s\S]*?)<\/div>/)
+//   return match ? match[1].replace(/<[^>]+>/g, '').trim() : '' // Remove HTML tags and trim
+// }
 
 // // Update your gamePromises to also fetch the game descriptions
 // const gamePromises = ids.map((id) => {
@@ -129,33 +129,33 @@ function extractDescription(html) {
 //   })
 
 function createWindow(): void {
-  // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 900,
     height: 670,
     show: false,
-    frame: false, // Disable the window frame
-    fullscreen: true, // Enable fullscreen mode
+    frame: false,
+    fullscreen: true,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
-      preload: join(__dirname, '../preload/index.js'),
+      preload: path.join(__dirname, '../preload/index.js'),
       sandbox: false,
+      contextIsolation: true,
     }
   })
 
-  // mainWindow.webContents.session.clearCache().then(() => {
-  //   console.log('Cache cleared.')
-  // })
+  mainWindow.webContents.session.clearCache().then(() => {
+    console.log('Cache cleared.')
+  })
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
   })
 
-  // mainWindow.webContents.setWindowOpenHandler((details) => {
-  //   shell.openExternal(details.url)
-  //   return { action: 'deny' }
-  // })
+  mainWindow.webContents.setWindowOpenHandler((details) => {
+    shell.openExternal(details.url)
+    return { action: 'deny' }
+  })
 
   // Load the index.html of the app.
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
@@ -165,7 +165,7 @@ function createWindow(): void {
   }
 }
 
-app.disableHardwareAcceleration();
+// app.disableHardwareAcceleration();
 
 app.whenReady().then(() => {
   electronApp.setAppUserModelId('com.electron')
@@ -173,6 +173,19 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window)
   })
   ipcMain.on('ping', () => console.log('pong'))
+  ipcMain.handle('open-game-detail', async (event, gameId) => {
+    const gameDetailWindow = new BrowserWindow({
+      width: 800,
+      height: 600,
+      webPreferences: {
+        preload: path.join(__dirname, '../preload/index.js'),
+        sandbox: false,
+        contextIsolation: true,
+      }
+    })
+
+    gameDetailWindow.loadURL(`file://${__dirname}/../renderer/index.html#/game/${gameId}`)
+  })
   createWindow()
   app.on('activate', function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
@@ -188,3 +201,4 @@ app.on('window-all-closed', () => {
 ipcMain.on('open-steam-game', (event, gameId) => {
   shell.openExternal(`steam://run/${gameId}`)
 })
+

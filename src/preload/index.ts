@@ -1,36 +1,53 @@
+// import { contextBridge, ipcRenderer } from 'electron'
+// import { electronAPI } from '@electron-toolkit/preload'
+
+// // Custom APIs for renderer
+// const api = {
+//   openGameDetails: (gameId) => ipcRenderer.invoke('open-game-detail', gameId),
+//   ping: () => ipcRenderer.send('ping'),
+// }
+
+// if (process.contextIsolated) {
+//   try {
+//     contextBridge.exposeInMainWorld('electron', electronAPI)
+//     contextBridge.exposeInMainWorld('api', api)
+//   } catch (error) {
+//     console.error(error)
+//   }
+// } else {
+//   window.electron = electronAPI
+//   window.api = api
+// }
+
+// interface api {
+//   openGameDetails: (gameId: string) => Promise<unknown>
+// }
+// declare global {
+//   interface Window {
+//     electron: ElectronAPI
+//     api: api
+//   }
+// }
+
 import { contextBridge, ipcRenderer } from 'electron'
-import { electronAPI } from '@electron-toolkit/preload'
+// import { electronAPI } from '@electron-toolkit/preload'
 
-// Custom APIs for renderer
-const api = {
-  openGameDetails: (): Promise<unknown> => ipcRenderer.invoke('open-game-details'),
-}
+// Assuming electronAPI does not conflict and is necessary
+// contextBridge.exposeInMainWorld('electron', electronAPI)
 
-// Use `contextBridge` APIs to expose Electron APIs to
-// renderer only if context isolation is enabled, otherwise
-// just add to the DOM global.
-if (process.contextIsolated) {
-  try {
-    contextBridge.exposeInMainWorld('electron', electronAPI)
-    contextBridge.exposeInMainWorld('api', api)
-    contextBridge.exposeInMainWorld('electron', {
-      shell: require('electron').shell,
-      ipcRenderer: {
-        send: (channel, data) => {
-          // whitelist channels
-          const validChannels = ['open-steam-game']
-          if (validChannels.includes(channel)) {
-            ipcRenderer.send(channel, data)
-          }
-        }
-      }
+contextBridge.exposeInMainWorld('api', {
+  openGameDetails: (gameId) => {
+    ipcRenderer.invoke('open-game-detail', gameId)
+  },
+  fetchGameDetails: (appid) => {
+    ipcRenderer.send('fetch-game-details', appid)
+  },
+  receiveGameDetails: (callback) => {
+    ipcRenderer.on('game-details-response', (_, arg) => {
+      callback(arg)
     })
-  } catch (error) {
-    console.error(error)
+  },
+  removeGameDetailsListener: () => {
+    ipcRenderer.removeAllListeners('game-details-response')
   }
-} else {
-  // @ts-ignore (define in dts)
-  window.electron = electronAPI
-  // @ts-ignore (define in dts)
-  window.api = api
-}
+})

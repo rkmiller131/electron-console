@@ -3,7 +3,10 @@ import GameLaunchLoader from '../LoadingScreens/GameLaunchLoader'
 
 import './GameDetails.scss'
 
-const index = (): JSX.Element => {
+interface indexProps {
+  id?: string
+}
+const index = ({ id }: indexProps): JSX.Element => {
   const [loading, setLoading] = useState(false)
 
   const openSteamGame = useCallback(() => {
@@ -13,6 +16,7 @@ const index = (): JSX.Element => {
     }, 0)
   }, [])
 
+  console.log('game is ', id);
   return (
     <div className="main-container">
       {loading && <GameLaunchLoader />}
