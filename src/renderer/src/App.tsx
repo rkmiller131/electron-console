@@ -4,19 +4,21 @@ import Footer from './components/Footer'
 import { Header } from './components/Header'
 import Carousel from './components/Carousel'
 import VideoLoader from './components/LoadingScreens/VideoLoader'
-// import GameDetails from './components/GameDetails'
+import GameDetails from './components/GameDetails'
 import { store } from './redux/store'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom'
 import { selectGameList, selectGameStatus, fetchGames } from './redux/gameSlice'
 import { fetchApps, selectAppList, selectAppStatus } from './redux/dashboardSlice'
 
 
 function App(): JSX.Element {
-  const [videoEnded, setVideoEnded] = useState(false)
+  const [videoEnded, setVideoEnded] = useState(false);
+
+  const { id } = useParams();
 
   const handleVideoEnd = ():void => {
     setVideoEnded(true)
-  }
+  };
 
   return (
     <Provider store={store}>
@@ -36,29 +38,29 @@ function App(): JSX.Element {
               src={'/homepage.mp4'}
             />
             <Routes>
-              <Route  
-                path="/"  
-                element={
-                  <Carousel 
-                  dataList={selectAppList} 
-                  dataStatus={selectAppStatus} 
-                  fetchData={fetchApps}
-                />
-                } 
-              />
-              {/* <Route  
-                path="/game/:id"  
-                element={<GameDetails />} 
-              /> */}
-              <Route  
-                path="/games"  
+              <Route
+                path="/"
                 element={
                   <Carousel
-                    dataList={selectGameList} 
-                    dataStatus={selectGameStatus} 
+                  dataList={selectAppList}
+                  dataStatus={selectAppStatus}
+                  fetchData={fetchApps}
+                />
+                }
+              />
+              <Route
+                path="/game/:id"
+                element={<GameDetails id={id}/>}
+              />
+              <Route
+                path="/games"
+                element={
+                  <Carousel
+                    dataList={selectGameList}
+                    dataStatus={selectGameStatus}
                     fetchData={fetchGames}
                   />
-                } 
+                }
               />
             </Routes>
             <Footer />
