@@ -67,4 +67,4 @@ const index = ({ id }: indexProps): JSX.Element => {
   )
 }
 
-export default index
+export default index;
