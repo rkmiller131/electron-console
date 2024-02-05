@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import HamburgerMenu from '../Hamburger'
 import './Header.scss' // Ensure this points to your SCSS file
 

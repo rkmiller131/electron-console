@@ -11,7 +11,7 @@
     ipcRenderer.on('game-id', (event, gameId) => {
       // Dynamically create a script tag to load the GameDetailsPage component
       const script = document.createElement('script');
-      script.src = `dist/renderer/windows/GameDetailPage/GameDetail.js`;
+      script.src = `./renderer/mainGameDetail.js`;
       script.onload = () => {
         // Once the script is loaded, pass the game ID to the component
         window.dispatchEvent(new CustomEvent('game-id', { detail: gameId }));

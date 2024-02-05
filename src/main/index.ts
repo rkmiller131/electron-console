@@ -1,4 +1,4 @@
-import { app, shell, BrowserWindow, ipcMain, net } from 'electron'
+import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
@@ -175,7 +175,7 @@ app.whenReady().then(() => {
 
   ipcMain.on('ping', () => console.log('pong'))
 
-  ipcMain.handle('open-game-detail', async (event, gameId) => {
+  ipcMain.handle('open-game-detail', async (_event, gameId) => {
     const gameDetailWindow = new BrowserWindow({
       fullscreen: true,
       frame: false,
@@ -187,8 +187,8 @@ app.whenReady().then(() => {
       }
     })
 
-    gameDetailWindow.loadURL(`file://${path.join(__dirname, '../renderer/windows/GameDetailPage/index.html')}`);
-    // gameDetailWindow.loadFile(join(__dirname, '../renderer/windows/GameDetailPage/index.html'));
+    // gameDetailWindow.loadURL(`file://${path.join(__dirname, '../renderer/windows/GameDetailPage/index.html')}`);
+    gameDetailWindow.loadFile(join(__dirname, '../renderer/detailsIndex.html'));
     gameDetailWindow.webContents.on('did-finish-load', () => {
       // Send the game ID to the new BrowserWindow
       gameDetailWindow.webContents.send('game-id', gameId);
@@ -216,7 +216,7 @@ app.on('window-all-closed', () => {
   }
 })
 
-ipcMain.on('open-steam-game', (event, gameId) => {
+ipcMain.on('open-steam-game', (_event, gameId) => {
   shell.openExternal(`steam://run/${gameId}`)
 })
 
