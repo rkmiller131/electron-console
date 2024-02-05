@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const GameDetail: React.FC = () => {
+const GameDetailPage: React.FC = () => {
   const [gameId, setGameId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -21,10 +21,10 @@ const GameDetail: React.FC = () => {
 
   return (
     <div>
-      <h2>{gameId}</h2>
+      <h2>{`The selected game id is: ${gameId}`}</h2>
       {/* Display other game details */}
     </div>
   );
 };
 
-export default GameDetail;
+export default GameDetailPage;

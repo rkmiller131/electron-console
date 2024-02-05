@@ -1,4 +1,4 @@
-import { AppDispatch, RootState } from '@renderer/redux/store'
+import { AppDispatch, RootState } from '../../redux/store'
 import { useCallback, useEffect, useRef, useState, lazy, Suspense } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AsyncThunk } from '@reduxjs/toolkit'
