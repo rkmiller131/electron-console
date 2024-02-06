@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useCallback, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './GameItem.scss'
 
 interface GameItemProps {
@@ -10,32 +11,24 @@ interface GameItemProps {
 }
 
 const GameItem: React.FC<GameItemProps> = ({ selected, image }) => {
+  const navigate = useNavigate();
 
-  // const openSteamGame = useCallback(() => {
-  //   if (selected) {
-  //     setTimeout(() => {
-  //       window.electron.ipcRenderer.send('open-steam-game', image.id)
-  //     }, 3000)
-  //   }
-  // }, [selected, image.id])
+  const handleKeyPress = useCallback(
+    (event) => {
+      // if the user presses Esc, go back to home dash
+      if (event.key === 'Escape') {
+        navigate('/')
+        window.location.reload();
+      }
+    }, [])
 
-  // const handleKeyPress = useCallback(
-  //   (event) => {
-  //     if (event.key === 'Enter') {
-  //       navigate('/game/:' + image.id)
-  //       // openSteamGame()
-  //     }
-  //   },
-  //   [openSteamGame]
-  // )
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress)
 
-  // useEffect(() => {
-  //   document.addEventListener('keydown', handleKeyPress)
-
-  //   return () => {
-  //     document.removeEventListener('keydown', handleKeyPress)
-  //   }
-  // }, [handleKeyPress])
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress)
+    }
+  }, [])
 
   return (
     <div className={`game-item-inner ${selected ? 'selected' : ''}`} >

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Provider } from 'react-redux'
 import Footer from './components/Footer'
 import { Header } from './components/Header'
@@ -13,56 +13,64 @@ import { fetchApps, selectAppList, selectAppStatus } from './redux/dashboardSlic
 function App(): JSX.Element {
   const [videoEnded, setVideoEnded] = useState(false);
 
+  useEffect(() => {
+    const hasVideoPlayed = sessionStorage.getItem('hasVideoPlayed');
+    if (hasVideoPlayed) {
+      setVideoEnded(true);
+    }
+  }, []);
+
   const handleVideoEnd = ():void => {
-    setVideoEnded(true)
+    setVideoEnded(true);
+    sessionStorage.setItem('hasVideoPlayed', 'true');
   };
+
+  if (!videoEnded) {
+    return <VideoLoader onEnd={handleVideoEnd} />;
+  }
 
   return (
     <Provider store={store}>
       <BrowserRouter>
-        {!videoEnded ? (
-          <VideoLoader onEnd={handleVideoEnd} />
-        ) : (
-          <main className='main-container'>
-            <Header />
-            {/* background video that plays behind the carousel */}
-            <video
-              id="homepage-video"
-              className="video-loader"
-              preload="auto"
-              loop
-              autoPlay
-              src={'/homepage.mp4'}
+        <main className='main-container'>
+          <Header />
+          {/* background video that plays behind the carousel */}
+          <video
+            id="homepage-video"
+            className="video-loader"
+            preload="auto"
+            loop
+            autoPlay
+            src={'/homepage.mp4'}
+          />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Carousel
+                dataList={selectAppList}
+                dataStatus={selectAppStatus}
+                fetchData={fetchApps}
+              />
+              }
             />
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <Carousel
-                  dataList={selectAppList}
-                  dataStatus={selectAppStatus}
-                  fetchData={fetchApps}
+            {/* <Route
+              path="/game/:id"
+              element={<GameDetails />}
+            /> */}
+            <Route
+              path="/games"
+              element={
+                <Carousel
+                  dataList={selectGameList}
+                  dataStatus={selectGameStatus}
+                  fetchData={fetchGames}
                 />
-                }
-              />
-              {/* <Route
-                path="/game/:id"
-                element={<GameDetails />}
-              /> */}
-              <Route
-                path="/games"
-                element={
-                  <Carousel
-                    dataList={selectGameList}
-                    dataStatus={selectGameStatus}
-                    fetchData={fetchGames}
-                  />
-                }
-              />
-            </Routes>
-            <Footer />
-          </main>
-        )}
+              }
+            />
+          </Routes>
+          <Footer />
+        </main>
       </BrowserRouter>
     </Provider>
   )
