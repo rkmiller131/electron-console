@@ -10,33 +10,7 @@
   </head>
 
   <body>
-    <div id="root">This should disappear when the script loads</div>
+    <div id="root"></div>
     <script type="module" src="./src/details_main.tsx"></script>
   </body>
 </html>
-
-<!-- <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Game Details</title>
-</head>
-<body>
-  <div id="root2"></div> -->
-  <!-- <script>
-    const { ipcRenderer } = require('electron');
-    ipcRenderer.on('game-id', (event, gameId) => {
-      // Dynamically create a script tag to load the GameDetailsPage component
-      const script = document.createElement('script');
-      script.src = `./renderer/mainGameDetail.js`;
-      script.onload = () => {
-        // Once the script is loaded, pass the game ID to the component
-        window.dispatchEvent(new CustomEvent('game-id', { detail: gameId }));
-      };
-      document.body.appendChild(script);
-    });
-  </script> -->
-  <!-- <script type="module" src="/src/renderer/src/windows/GameDetailPage/mainGameDetail.js"></script> -->
-  <!-- <script type="module" src="/src/details_main.tsx"></script>
-</body>
-</html> -->

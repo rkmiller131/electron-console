@@ -78,7 +78,7 @@ export default function Carousel<T extends CarouselItem>({
         window.api.openGameDetails(gameId);
       }
     }
-  }, [list.length, playNavigationSound])
+  }, [list.length, playNavigationSound, selectedIndex])
 
   useEffect(() => {
     const animationFrame = requestAnimationFrame(updateContainerTransform)
@@ -96,7 +96,7 @@ export default function Carousel<T extends CarouselItem>({
         <div className="scroll-window">
           <div className="scroll-container" ref={containerRef}>
             {list?.map((game, index) => (
-              <div className="game-item" key={index}>
+              <div className="game-item" key={game.id}>
                 <LazyGameItem selected={index === selectedIndex} image={game} />
               </div>
             ))}

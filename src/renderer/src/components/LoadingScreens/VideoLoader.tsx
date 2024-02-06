@@ -29,10 +29,9 @@ const VideoLoader: React.FC<VideoLoaderProps> = ({ onEnd }) => {
       }
     };
   }, [onEnd]);
-  // note: temporarily had to mute and playsInline for chrome browser at home
   return (
     <div className="video-loader-container">
-      <video id="intro-video" className="video-loader" preload="auto" autoPlay muted playsInline src={introVideo} />
+      <video id="intro-video" className="video-loader" preload="auto" autoPlay src={introVideo} />
     </div>
   )
 }

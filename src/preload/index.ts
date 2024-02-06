@@ -3,6 +3,7 @@ import { electronAPI, ElectronAPI } from '@electron-toolkit/preload'
 
 const api = {
   openGameDetails: (gameId: string): Promise<unknown> => ipcRenderer.invoke('open-game-detail', gameId),
+  send: (channel, data): void => ipcRenderer.send(channel, data),
 }
 
 if (process.contextIsolated) {
@@ -19,6 +20,7 @@ if (process.contextIsolated) {
 
 interface api {
   openGameDetails: (gameId: string) => Promise<unknown>
+  send: (channel, data) => void
 }
 declare global {
   interface Window {

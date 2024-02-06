@@ -4,7 +4,6 @@ import Footer from './components/Footer'
 import { Header } from './components/Header'
 import Carousel from './components/Carousel'
 import VideoLoader from './components/LoadingScreens/VideoLoader'
-import GameDetails from './components/GameDetails'
 import { store } from './redux/store'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { selectGameList, selectGameStatus, fetchGames } from './redux/gameSlice'
@@ -46,10 +45,10 @@ function App(): JSX.Element {
                 />
                 }
               />
-              <Route
+              {/* <Route
                 path="/game/:id"
                 element={<GameDetails />}
-              />
+              /> */}
               <Route
                 path="/games"
                 element={
