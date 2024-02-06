@@ -1,4 +1,5 @@
 import './assets/main.scss'
+import './details_main'
 
 import React from 'react'
 import ReactDOM from 'react-dom/client'

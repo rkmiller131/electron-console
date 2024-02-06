@@ -187,8 +187,13 @@ app.whenReady().then(() => {
       }
     })
 
+    if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
+      gameDetailWindow.loadURL(`${process.env['ELECTRON_RENDERER_URL']}/details_index.html`)
+    } else {
+      gameDetailWindow.loadFile(join(__dirname, '../renderer/details_index.html'))
+    }
     // gameDetailWindow.loadURL(`file://${path.join(__dirname, '../renderer/windows/GameDetailPage/index.html')}`);
-    gameDetailWindow.loadFile(join(__dirname, '../renderer/detailsIndex.html'));
+    // gameDetailWindow.loadURL(join(__dirname, '../renderer/details_index.html'));
     gameDetailWindow.webContents.on('did-finish-load', () => {
       // Send the game ID to the new BrowserWindow
       gameDetailWindow.webContents.send('game-id', gameId);

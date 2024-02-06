@@ -6,7 +6,7 @@
     "src/preload/*",
     "src/renderer/src",
     "src/renderer/src/redux/store.ts"
-  ],
+, "src/renderer/src/details_main.tsx"  ],
   "compilerOptions": {
     "composite": true,
     "types": ["electron-vite/node"],
