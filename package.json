@@ -6,7 +6,7 @@
   "author": "example.com",
   "homepage": "https://electron-vite.org",
   "scripts": {
-    "copy-details": "copyfiles -f ./src/renderer/src/windows/GameDetailPage/detailsIndex.html ./out/renderer",
+    "copy-details": "copyfiles -f ./src/renderer/details_index.html ./out/renderer",
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
     "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
