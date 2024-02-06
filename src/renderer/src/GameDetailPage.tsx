@@ -27,6 +27,17 @@ const GameDetailPage: React.FC = () => {
     }, 0)
   }, [])
 
+  const handleKeyDown = useCallback((event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      window.electron.ipcRenderer.invoke('close-window', 'details');
+    }
+  }, [])
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [handleKeyDown])
+
   return (
     <div className="main-container">
       {loading && <GameLaunchLoader />}

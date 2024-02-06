@@ -128,6 +128,8 @@ import path from 'path'
 //     console.error('Error:', error)
 //   })
 
+let gameDetailWindow;
+
 function createWindow(): void {
   const mainWindow = new BrowserWindow({
     width: 900,
@@ -152,11 +154,6 @@ function createWindow(): void {
     mainWindow.show()
   })
 
-  // mainWindow.webContents.setWindowOpenHandler((details) => {
-  //   shell.openExternal(details.url)
-  //   return { action: 'deny' }
-  // })
-
   // Load the index.html of the app.
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
     mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
@@ -168,6 +165,7 @@ function createWindow(): void {
 // app.disableHardwareAcceleration();
 
 app.whenReady().then(() => {
+
   electronApp.setAppUserModelId('com.electron')
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
@@ -176,7 +174,7 @@ app.whenReady().then(() => {
   ipcMain.on('ping', () => console.log('pong'))
 
   ipcMain.handle('open-game-detail', async (_event, gameId) => {
-    const gameDetailWindow = new BrowserWindow({
+    gameDetailWindow = new BrowserWindow({
       fullscreen: true,
       frame: false,
       webPreferences: {
@@ -190,36 +188,17 @@ app.whenReady().then(() => {
     } else {
       gameDetailWindow.loadFile(join(__dirname, '../renderer/details_index.html'))
     }
-    // gameDetailWindow.loadURL(`file://${path.join(__dirname, '../renderer/windows/GameDetailPage/index.html')}`);
-    // gameDetailWindow.loadURL(join(__dirname, '../renderer/details_index.html'));
+    // Send the game ID to the new BrowserWindow
     gameDetailWindow.webContents.on('did-finish-load', () => {
-      // Send the game ID to the new BrowserWindow
       gameDetailWindow.webContents.send('game-id', gameId);
     });
+  })
 
-    // await gameDetailWindow.webContents.executeJavaScript('document.readyState')
-    // .then(readyState => {
-    //   while (readyState !== 'complete') {
-    //     console.log('waiting!')
-    //   }
-    // })
+  ipcMain.handle('close-window', (_event, data) => {
+    if (gameDetailWindow && data === 'details') {
+      gameDetailWindow.close();
+    }
 
-    // ipcMain.once('ready', () => {
-    //   console.log('ready was sent');
-    //   gameDetailWindow.webContents.send('game-id', gameId);
-    // })
-
-    // gameDetailWindow.webContents.send('game-id', gameId);
-
-    // gameDetailWindow.loadURL(`file://${__dirname}/../renderer/index.html#/game/${gameId}`)
-    // gameDetailWindow.loadFile(path.join(__dirname, '../renderer/index.html#game/1604890'));
-    // Load the HTML file and pass the gameId to the renderer process
-    // gameDetailWindow.loadFile(path.join(__dirname, '../renderer/index.html'));
-    // if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
-    //   gameDetailWindow.loadURL(`http://localhost:5173/game/${gameId}`);
-    // } else {
-    //   gameDetailWindow.loadURL(`file://${__dirname}/../renderer/index.html#/game/${gameId}`)
-    // }
   })
   createWindow()
   app.on('activate', function () {
