@@ -4,20 +4,17 @@ const GameDetailPage: React.FC = () => {
   const [gameId, setGameId] = useState<string | null>(null);
 
   useEffect(() => {
-    const handleGameId = (event: Event): void => {
-      const customEvent = event as CustomEvent;
-      if (customEvent.detail) {
-        setGameId(customEvent.detail);
-      }
+    const handleGameId = (_event: Electron.IpcRendererEvent, gameId: string): void => {
+      setGameId(gameId);
     };
 
-    window.addEventListener('game-id', handleGameId);
+    window.electron.ipcRenderer.on('game-id', handleGameId);
 
     return () => {
-      window.removeEventListener('game-id', handleGameId);
+      window.electron.ipcRenderer.removeAllListeners('game-id');
     };
 
-  }, []);
+  }, [gameId]);
 
   return (
     <div>

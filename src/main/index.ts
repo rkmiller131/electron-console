@@ -182,8 +182,6 @@ app.whenReady().then(() => {
       webPreferences: {
         preload: path.join(__dirname, '../preload/index.js'),
         sandbox: false,
-        contextIsolation: true,
-        webSecurity: false,
       }
     })
 
@@ -198,6 +196,20 @@ app.whenReady().then(() => {
       // Send the game ID to the new BrowserWindow
       gameDetailWindow.webContents.send('game-id', gameId);
     });
+
+    // await gameDetailWindow.webContents.executeJavaScript('document.readyState')
+    // .then(readyState => {
+    //   while (readyState !== 'complete') {
+    //     console.log('waiting!')
+    //   }
+    // })
+
+    // ipcMain.once('ready', () => {
+    //   console.log('ready was sent');
+    //   gameDetailWindow.webContents.send('game-id', gameId);
+    // })
+
+    // gameDetailWindow.webContents.send('game-id', gameId);
 
     // gameDetailWindow.loadURL(`file://${__dirname}/../renderer/index.html#/game/${gameId}`)
     // gameDetailWindow.loadFile(path.join(__dirname, '../renderer/index.html#game/1604890'));
