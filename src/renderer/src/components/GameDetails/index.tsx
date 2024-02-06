@@ -1,3 +1,6 @@
+// ------------------------------------------------------
+// NOTE THIS FILE IS NO LONGER IN USE - IT HAS BEEN REPLACED WITH GAMEDETAILPAGE.TSX FROM THE ROOT/SRC DIRECTORY
+// ------------------------------------------------------
 import { useCallback, useState } from 'react'
 import GameLaunchLoader from '../LoadingScreens/GameLaunchLoader'
 
